@@ -5,6 +5,8 @@ import Landing from './pages/Landing';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Game from './pages/Game';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,10 +16,8 @@ root.render(
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
       <Route path="/play" element={<Game />} />
-
-      {/* TODO: Add missing paths
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} /> */}
+      <Route path="/signup" element={<Signup />} />
       
     </Routes>
   </BrowserRouter>

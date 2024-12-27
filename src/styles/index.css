@@ -1,6 +1,23 @@
+:root{
+  --lightRed: #FF8787;
+  --darkRed: #772B2B;
+  --lightGreen: #CEEF4E;
+  /* --darkGreen: #67772B; */
+  --darkGreen: #97aa50;
+  --lightBlue: #9FD9FA;
+  --lightYellow: #FFE780;
+  --lightPurple: #DBCAFF;
+  --lightGray: #F2F2F2;
+  --gray: #969696;
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* font-size: 24px; */
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -11,3 +28,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.pixelFont {
+  font-family: "Pixelify Sans", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+/* li a:hover:not(.active) {
+  background-color: var(--lightGray);
+  border-radius: 6px;
+  padding: 6px 16px;
+}  */

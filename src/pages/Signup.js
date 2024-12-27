@@ -1,15 +1,15 @@
-import '../styles/About.css';
+import '../styles/Signup.css';
 import HeaderNavigationBar from '../components/HeaderNavigationBar';
 import FooterNavigationBar from '../components/FooterNavigationBar';
 
-const About = () => {
+const Signup = () => {
     return (
-        <div id='aboutContainer'>
+        <div id='signupContainer'>
             <HeaderNavigationBar/>
-            About
+            Signup
             {/* <FooterNavigationBar/> */}
         </div>
     );
 };
 
-export default About;
+export default Signup;
