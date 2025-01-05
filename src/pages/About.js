@@ -7,7 +7,7 @@ const About = () => {
         <div id='aboutContainer'>
             <HeaderNavigationBar/>
             About
-            {/* <FooterNavigationBar/> */}
+            <FooterNavigationBar/>
         </div>
     );
 };

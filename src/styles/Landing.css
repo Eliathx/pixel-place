@@ -1,10 +1,97 @@
 #landingContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: var(--white);
+  gap: 96px;
+}
 
-  padding-top: 64px;
+#landingTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 64px;
+  padding: 0 64px;
+}
+
+#landingTitleContainerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#landingTitle {
+  font-size: 96px;
+  line-height: 90px;
+}
+
+#canvasWord {
+  font-size: 128px;
+}
+
+#landingDescription {
+  font-size: 16px;
+}
+
+#gameImage {
+  /* width: 656px; */
+  height: 414px;
+}
+
+.joinLink {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 6px;
+  gap: 8px;
+  background-color: var(--lightGreen);
+  height: auto;
+  width: fit-content;
+}
+
+.joinLink:hover {
+  background-color: var(--darkGreen);
+  color: var(--lightGreen);
+
+  path {
+    fill: var(--lightGreen);
+  }
+}
+
+#landingHowItWorks {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 24px;
+  padding: 0 64px;
+}
+
+#howItWorksTitleText {
+  font-size: 32px;
+}
+
+#howItWorksDescription {
+  color: var(--lightBlack);
+}
+
+#howItWorksSteps {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.howItWorksStep {
+  width: 33.3333%;
+}
+
+.howItWorksStepNumber {
+  font-size: 64px;
+  line-height: 90px;
+}
+
+.howItWorksStepTitle {
+  color: var(--lightBlack);
+}
+
+.howItWorksStepDescription {
+  color: var(--gray);
 }

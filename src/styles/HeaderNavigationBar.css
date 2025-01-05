@@ -1,3 +1,7 @@
+#headerNavigationBarContainer {
+  padding-top: 64px;
+}
+
 ul.headerNavigationBar {
   display: flex;
   list-style-type: none;
@@ -29,6 +33,7 @@ ul.headerNavigationBar {
   gap: 8px;
   background-color: var(--lightGreen);
   height: auto;
+  width: fit-content;
 } 
 
 a.loginLink:hover {

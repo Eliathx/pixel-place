@@ -7,7 +7,7 @@ const Contact = () => {
         <div id='contactContainer'>
             <HeaderNavigationBar/>
             Contact
-            {/* <FooterNavigationBar/> */}
+            <FooterNavigationBar/>
         </div>
     );
 };

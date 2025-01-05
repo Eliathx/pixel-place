@@ -1,2 +1,50 @@
-/* TODO: Compeltar footer */
+.footerNavigationBarContainer {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  
+  background-color: var(--white);
+  box-shadow: 0px -4px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 48px 64px;
+  height: fit-content;
+  gap: 64px;
+}
 
+#upperFooterPart {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+#footerTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#footerSlogan {
+  color: var(--gray);
+  font-size: 12px;
+}
+
+#footerLinks {
+  display: flex;
+  gap: 16px;
+}
+
+#lowerFooterPart {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#socialMediaLinks {
+  display: flex;
+  gap: 16px;
+}
