@@ -4,6 +4,8 @@
   gap: 96px;
 }
 
+
+
 #landingTitleContainer {
   display: flex;
   justify-content: space-between;
@@ -56,6 +58,8 @@
   }
 }
 
+
+
 #landingHowItWorks {
   display: flex;
   flex-direction: column;
@@ -95,3 +99,38 @@
 .howItWorksStepDescription {
   color: var(--gray);
 }
+
+
+
+#landingMeasures {
+  display: flex;
+  justify-content: center;
+  gap: 96px;
+  padding: 0 64px;
+}
+
+.measureContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  /* width: 20%; */
+}
+
+.measureTitle {
+  font-size: 48px;
+}
+
+.measureDescription {
+  color: var(--lightBlack);
+}
+
+
+
+/* #redYellowDecoration {
+  position: absolute;
+  top: 173px;
+  left: 816px;
+  z-index: -1;
+
+} */
