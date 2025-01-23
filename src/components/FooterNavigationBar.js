@@ -2,7 +2,7 @@ import '../styles/FooterNavigationBar.css';
 
 const FooterNavigationBar = () => {
     return (
-        <nav className='footerNavigationBarContainer'>
+        <footer className='footerNavigationBarContainer'>
             <div id='upperFooterPart'>
                 <div id='footerTitle'>
                     <a href="/" id='logo'>
@@ -42,7 +42,7 @@ const FooterNavigationBar = () => {
                     </a>
                 </div>
             </div>
-        </nav>
+        </footer>
     );
 };
 

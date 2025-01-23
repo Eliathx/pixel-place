@@ -1,0 +1,26 @@
+.color-palette {
+    position: absolute;
+    display: flex;
+    gap: 12px;
+    bottom: 3rem;
+    left: 30%;
+  }
+  
+  .color-swatch {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  
+  .color-swatch:hover {
+    transform: scale(1.2);
+    border-color: #000;
+  }
+  
+  .color-swatch.selected {
+    border-color: #000;
+    transform: scale(1.2);
+  }
+  
