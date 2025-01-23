@@ -1,13 +1,18 @@
-h1 {
+h1{
     font-weight: normal;
     line-height: 0;
 }
-
-.podiumContainer {
+.podiumContainer{
     margin: 0 auto;
     width: fit-content;
+   display: flex;
+   align-items: flex-end; 
+}
+
+.leaderboardContainer{
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
 }
 
 .podiumContainer > * {
@@ -26,75 +31,85 @@ h1 {
 .podiumContainer > * > span {
     position: absolute; 
     bottom: -1.5rem;
-    color: inherit; 
-    font-size: inherit; 
+    color: initial;
+    font-size: initial; 
 }
 
-#firstPlace {
+
+#firstPlace{
     background-color: var(--lightRed);
     height: 300px;
 }
-#firstPlace > span {
+
+
+#firstPlace > span{
     font-size: 1.5rem;
 }
-#firstPlace > svg {
+#firstPlace > svg{
     color: gold;
     position: absolute;
     top: -4.7rem;
     transform: rotate(-10deg);
     left: 1rem;
 }
-
-#secondPlace {
+#secondPlace{
     background-color: var(--lightBlue);
     height: 220px;
     transform: rotate(-10deg);
+
 }
 
-#thirdPlace {
+#thirdPlace{
     background-color: var(--lightPurple);
     height: 180px;
     transform: rotate(10deg);
 }
 
-.leaderboardContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+thead{
+    background-color: #D8D8D8;
+    border-radius: 8px;
+}
+
+th{
+    padding: 1rem;
+
+}
+td{
+    padding: 1rem;
+
+}
+
+td:nth-child(2) {
+    width: 210px;
+    text-align: center;
+}
+td:nth-child(3) {
+    text-align: center;
 }
 
 .leaderboardTable {
     border-collapse: collapse;
     position: relative;
+    
     top: -1rem;
+    
     overflow: hidden;
     border-radius: 12px;
-    outline: 2px solid #D8D8D8; 
+    outline: 2px #D8D8D8 solid;
+    
 }
 
-thead {
-    background-color: #D8D8D8;
-    border-radius: 8px;
-}
-
-th, td {
-    padding: 1rem;
-    text-align: center;
-}
-
-td:nth-child(2) {
-    width: 210px;
-}
-
-.leaderboardTable > tbody > tr:nth-child(1) {
+.leaderboardTable > tbody > tr:nth-child(1){
     color: var(--lightRed);
     font-weight: bold;
 }
-.leaderboardTable > tbody > tr:nth-child(2) {
+.leaderboardTable > tbody > tr:nth-child(2){
     color: #61ADD9;
     font-weight: bold;
+
 }
-.leaderboardTable > tbody > tr:nth-child(3) {
+.leaderboardTable > tbody > tr:nth-child(3){
     color: #AD90EA;
     font-weight: bold;
+
 }
