@@ -1,3 +1,9 @@
+  .gameContainer{
+    overflow: hidden; 
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+  
   .pixel-grid-container {
     overflow: hidden;
     position: relative;

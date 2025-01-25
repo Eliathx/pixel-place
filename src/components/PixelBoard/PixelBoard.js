@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import ColorPalette from "../ColorPalette/ColorPalette";
-import "./pixelBoard.css"
+import "./pixelBoard.css";
 import SelectedPixelInfo from "./SelectedPixelInfo";
 
-const PixelArtCanvas = () => {
+const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
   const canvasRef = useRef(null);
   const gridSize = 100;
   const [pixelSize, setPixelSize] = useState(10);
@@ -43,6 +43,8 @@ const PixelArtCanvas = () => {
   }, [grid, pixelSize, offsetX, offsetY]);
 
   const handleCanvasClick = (e) => {
+    if (!canDraw) return;
+
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     const x = Math.floor((e.clientX - rect.left - offsetX) / pixelSize);
@@ -52,6 +54,7 @@ const PixelArtCanvas = () => {
       const newGrid = [...grid];
       newGrid[y][x] = selectedColor;
       setGrid(newGrid);
+      onPixelPlaced(); 
     }
   };
 
@@ -81,19 +84,7 @@ const PixelArtCanvas = () => {
       setOffsetY(newOffsetY);
     }
   };
-  useEffect(() => {
-    const fetchPixels = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/api.php");
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching pixel data:", error);
-      }
-    };
-    fetchPixels();
-  }, []);
-  
+
   const handleMouseUp = (e) => {
     if (e.button === 2) { 
       setIsDragging(false);
@@ -102,7 +93,7 @@ const PixelArtCanvas = () => {
 
   return (
     <div>
-      <SelectedPixelInfo color={"orange"}/>
+      <SelectedPixelInfo color={"orange"} />
       <ColorPalette
         colors={["FFFFFF", "0E0E27", "28C641", "2D93DD", "7B53AD", "9B9B9B", "D32734", "DA7D22", "E6DA29"]}
         onColorSelect={setSelectedColor}

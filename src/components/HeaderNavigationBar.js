@@ -2,7 +2,7 @@ import '../styles/HeaderNavigationBar.css';
 
 const HeaderNavigationBar = () => {
     return (
-        <div id='headerNavigationBarContainer'>
+        <div className='headerNavigationBarContainer'>
             <ul className='headerNavigationBar'>
                 <li>
                     <a href="/" className='logo'>
