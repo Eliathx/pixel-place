@@ -36,8 +36,8 @@ const About = () => {
                     </div>
                 </div>
                 <div>
-                    <p>We work together to create something greater than the sum of our parts.
-                    The project is built on global cooperation, where every user contributes to a collective work of art.</p>
+                    <p>We foster freedom of expression and innovation.
+                    The platform encourages users to explore and experiment.</p>
                     <div>
                         <div className='valueIconContainer' style={{backgroundColor: "var(--lightRed)"}}>
                         <svg width="96" height="96" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,8 +48,9 @@ const About = () => {
                     </div>
                 </div>
                 <div>
-                    <p>We work together to create something greater than the sum of our parts.
-                    The project is built on global cooperation, where every user contributes to a collective work of art.</p>
+                    <p>We value diverse ideas and perspectives.
+                        Anyone can participate and feel welcome.
+                        </p>
                     <div>
                         <div className='valueIconContainer' style={{backgroundColor: "var(--lightPurple)"}}>
                         <svg width="97" height="96" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,8 +61,8 @@ const About = () => {
                     </div>
                 </div>
                 <div>
-                    <p>We work together to create something greater than the sum of our parts.
-                    The project is built on global cooperation, where every user contributes to a collective work of art.</p>
+                    <p>We enjoy the creative process and connecting with others.
+                    The project is about having fun while creating, facing challenges, and engaging with the community.</p>
                     <div>
                         <div className='valueIconContainer' style={{backgroundColor: "var(--lightBlue)"}}>
                         <svg width="97" height="96" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg">
