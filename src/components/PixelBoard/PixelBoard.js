@@ -20,6 +20,67 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
   const [startDragX, setStartDragX] = useState(0);
   const [startDragY, setStartDragY] = useState(0);
 
+  const fetchPixels = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/getPixels.php");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        console.error(data.error);
+        return;
+      }
+
+      const newGrid = [...grid];
+
+      data.forEach((pixel) => {
+        const { row, col, color } = pixel;
+        if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
+          newGrid[row][col] = color;
+        }
+      });
+
+      setGrid(newGrid);
+    } catch (error) {
+      console.error("Error fetching pixels:", error);
+    }
+  };
+
+  const placePixel = async (row, col, color) => {
+    try {
+      const response = await fetch("http://localhost:8000/placePixel.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ row, col, color }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        console.error(data.error);
+        return;
+      }
+
+      console.log("Pixel placed successfully:", data);
+    } catch (error) {
+      console.error("Error placing pixel:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPixels();   // cargar los píxeles cuando el componente se monte
+  }, []);
+
   const drawGrid = (ctx) => {
     for (let row = 0; row < gridSize; row++) {
       for (let col = 0; col < gridSize; col++) {
@@ -54,7 +115,10 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
       const newGrid = [...grid];
       newGrid[y][x] = selectedColor;
       setGrid(newGrid);
-      onPixelPlaced(); 
+      onPixelPlaced();
+
+      // Enviar el píxel al servidor
+      placePixel(y, x, selectedColor);
     }
   };
 
