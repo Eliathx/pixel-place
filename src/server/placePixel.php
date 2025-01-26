@@ -19,18 +19,30 @@ if (!isset($data['row']) || !isset($data['col']) || !isset($data['color'])) {
 $row = $data['row'];
 $col = $data['col'];
 $color = $data['color'];
+$username = $data['username'];
 
 try {
-    // Insertar/actualizar en la base de datos
-    $query = "INSERT INTO Pixel (row, col, color, userId) VALUES (:row, :col, :color, 1)
+    $queryUserId = 'SELECT id FROM "User" WHERE username = :username';
+    $stmtUserId = $conn->prepare($queryUserId);
+    $stmtUserId->bindParam(':username', $username);
+    $stmtUserId->execute();
+    $userId = $stmtUserId->fetchColumn();
+
+    if (!$userId) {
+        echo json_encode(["error" => "Usuario no encontrado"]);
+        exit;
+    }
+
+    $query = "INSERT INTO Pixel (row, col, color, userId) VALUES (:row, :col, :color, :userId)
               ON CONFLICT (row, col) DO UPDATE SET color = :color";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':row', $row);
     $stmt->bindParam(':col', $col);
     $stmt->bindParam(':color', $color);
+    $stmt->bindParam(':userId', $userId); 
     $stmt->execute();
 
-    // Enviar mensaje al WebSocket
+    // enviar mensaje al WebSocket
     $client = new Client("ws://localhost:8080");
     $client->send(json_encode([
         'action' => 'placePixel',

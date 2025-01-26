@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import PixelArtCanvas from "../components/PixelBoard/PixelBoard";
 import GameHeader from "../components/GameHeader/GameHeader";
 
-const Game = () => {
+const Game = ({username}) => {
     const [canDraw, setCanDraw] = useState(false);
     const [timeLeft, setTimeLeft] = useState(5); 
 
@@ -25,8 +25,8 @@ const Game = () => {
   
     return (
       <div className="gameContainer">
-        <GameHeader timeLeft={timeLeft}/>
-        <PixelArtCanvas canDraw={canDraw} onPixelPlaced={handlePixelPlaced} />
+        <GameHeader timeLeft={timeLeft} username={username}/>
+        <PixelArtCanvas canDraw={canDraw} onPixelPlaced={handlePixelPlaced} username={username}/>
       </div>
     );
   };

@@ -3,7 +3,7 @@ import ColorPalette from "../ColorPalette/ColorPalette";
 import "./pixelBoard.css";
 import SelectedPixelInfo from "./SelectedPixelInfo";
 
-const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
+const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
   const canvasRef = useRef(null);
   const gridSize = 100;
   const [pixelSize, setPixelSize] = useState(10);
@@ -41,7 +41,7 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
   
       ws.onclose = () => {
         console.log("Desconectado. Reconectando...");
-        setTimeout(connectWebSocket, 1000); // Reconectar después de 1 segundo
+        setTimeout(connectWebSocket, 1000);
       };
   
       return ws;
@@ -92,7 +92,7 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ row, col, color }),
+        body: JSON.stringify({ row, col, color, username }),
       });
 
       if (!response.ok) {
