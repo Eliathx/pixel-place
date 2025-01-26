@@ -9,38 +9,39 @@ import Leaderboard from '../components/Leaderboard/Leaderboard';
 const Landing = () => {
     const [pixelsPlaced, setPixelsPlaced ] = useState(100);
     const [activeUsers , setActiveUsers ] = useState(10);
-    const [contries , setCountries] = useState(3);
+    const [contries , setCountries] = useState(100);
     const [dateLive] = useState(new Date('2024-12-3'));
     const [daysLive, setDaysLive] = useState(0);
 
     // Esta data se deberá obtener de la base de datos con un query del top 5 de usuarios con más pixeles colocados
     // pero por ahora la dejaré hard-coded
     
-    const [leadeboardData, setLeadeboardData] = useState(
-        [
-            {
-                user: 'Alice',
-                pixelsPlaced: 1000
-            },
-            {
-                user: 'Bob',
-                pixelsPlaced: 900
-            },
-            {
-                user: 'Charlie',
-                pixelsPlaced: 752
-            },
-            {
-                user: 'Sebastian',
-                pixelsPlaced: 501
-            },
-            {
-                user: 'Santiago',
-                pixelsPlaced: 357
-            }
-        ]
-    )
+    const [leaderboardData, setLeaderboardData] = useState([])
         
+    useEffect(() => {
+        const fetchLeaderboardData = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/getLeaderboard.php');
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos');
+                }
+                const data = await response.json();
+
+                const formattedData = data.map(user => ({
+                    user: user.username,
+                    pixelsPlaced: user.pixelsplaced
+                }));
+
+                setLeaderboardData(formattedData);
+                console.log("Leaderboard data:", formattedData);
+            } catch (error) {
+                console.error("Error fetching leaderboard data:", error);
+            }
+        };
+
+        fetchLeaderboardData();
+    }, []);
+
     useEffect(() => {
         const currentDate = new Date();
         const timeDifference = currentDate - dateLive;
@@ -159,7 +160,7 @@ const Landing = () => {
                  
             </section>
             <section>
-                <Leaderboard leadeboardData={leadeboardData}/>
+                <Leaderboard leaderboardData={leaderboardData}/>
             </section>
             <FooterNavigationBar/>
             <img src='redYellowDecor.svg' alt='redYellowDecor' className='bgDecor' 

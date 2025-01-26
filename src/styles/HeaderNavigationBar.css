@@ -1,4 +1,4 @@
-#headerNavigationBarContainer {
+.headerNavigationBarContainer {
   padding-top: 64px;
   position: relative;
   z-index: 100;

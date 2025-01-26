@@ -22,6 +22,7 @@ $color = $data['color'];
 $username = $data['username'];
 
 try {
+    // Obtener el ID del usuario
     $queryUserId = 'SELECT id FROM "User" WHERE username = :username';
     $stmtUserId = $conn->prepare($queryUserId);
     $stmtUserId->bindParam(':username', $username);
@@ -33,6 +34,7 @@ try {
         exit;
     }
 
+    // Insertar o actualizar el píxel
     $query = "INSERT INTO Pixel (row, col, color, userId) VALUES (:row, :col, :color, :userId)
               ON CONFLICT (row, col) DO UPDATE SET color = :color";
     $stmt = $conn->prepare($query);
@@ -42,7 +44,12 @@ try {
     $stmt->bindParam(':userId', $userId); 
     $stmt->execute();
 
-    // enviar mensaje al WebSocket
+    $queryUpdatePixelsPlaced = 'UPDATE "User" SET "pixelsplaced" = "pixelsplaced" + 1 WHERE id = :userId';
+    $stmtUpdatePixelsPlaced = $conn->prepare($queryUpdatePixelsPlaced);
+    $stmtUpdatePixelsPlaced->bindParam(':userId', $userId);
+    $stmtUpdatePixelsPlaced->execute();
+
+    // Enviar mensaje al WebSocket
     $client = new Client("ws://localhost:8080");
     $client->send(json_encode([
         'action' => 'placePixel',
