@@ -1,5 +1,9 @@
 {
     "require": {
-        "cboden/ratchet": "^0.4.4"
+        "cboden/ratchet": "^0.4.4",
+        "textalk/websocket": "^1.5"
+    },
+    "scripts": {
+        "start": "php src/server/websocket_server.php"
     }
 }

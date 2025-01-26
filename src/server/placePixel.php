@@ -1,10 +1,13 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:3000");
+require __DIR__ . '/vendor/autoload.php';
+require_once 'config.php'; // configuración de la base de datos
+
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
-require_once 'config.php'; // database config
+use WebSocket\Client;
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -18,7 +21,7 @@ $col = $data['col'];
 $color = $data['color'];
 
 try {
-    // insert or update pixel
+    // Insertar/actualizar en la base de datos
     $query = "INSERT INTO Pixel (row, col, color, userId) VALUES (:row, :col, :color, 1)
               ON CONFLICT (row, col) DO UPDATE SET color = :color";
     $stmt = $conn->prepare($query);
@@ -27,8 +30,21 @@ try {
     $stmt->bindParam(':color', $color);
     $stmt->execute();
 
-    echo json_encode(["success" => true]);
+    // Enviar mensaje al WebSocket
+    $client = new Client("ws://localhost:8080");
+    $client->send(json_encode([
+        'action' => 'placePixel',
+        'row' => $row,
+        'col' => $col,
+        'color' => $color,
+    ]));
+    $client->close();
+
+    echo json_encode(["success" => true, "message" => "Pixel guardado y transmitido"]);
+
 } catch (PDOException $e) {
-    echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
+    echo json_encode(["error" => "Error en la base de datos: " . $e->getMessage()]);
+} catch (Exception $e) {
+    echo json_encode(["error" => "Error al conectar al WebSocket: " . $e->getMessage()]);
 }
 ?>

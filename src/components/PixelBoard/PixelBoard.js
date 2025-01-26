@@ -20,6 +20,37 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
   const [startDragX, setStartDragX] = useState(0);
   const [startDragY, setStartDragY] = useState(0);
 
+  useEffect(() => {
+    const connectWebSocket = () => {
+      const ws = new WebSocket("ws://localhost:8080");
+  
+      ws.onopen = () => {
+        console.log("Conectado al WebSocket");
+      };
+  
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.action === "updatePixel") {
+          setGrid((prevGrid) => {
+            const newGrid = [...prevGrid];
+            newGrid[data.row][data.col] = data.color;
+            return newGrid;
+          });
+        }
+      };
+  
+      ws.onclose = () => {
+        console.log("Desconectado. Reconectando...");
+        setTimeout(connectWebSocket, 1000); // Reconectar después de 1 segundo
+      };
+  
+      return ws;
+    };
+  
+    const ws = connectWebSocket();
+    return () => ws.close();
+  }, []);
+
   const fetchPixels = async () => {
     try {
       const response = await fetch("http://localhost:8000/getPixels.php");
@@ -50,6 +81,10 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
     }
   };
 
+  useEffect(() => {
+    fetchPixels();
+  }, []);
+
   const placePixel = async (row, col, color) => {
     try {
       const response = await fetch("http://localhost:8000/placePixel.php", {
@@ -77,10 +112,7 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
     }
   };
 
-  useEffect(() => {
-    fetchPixels();   // cargar los píxeles cuando el componente se monte
-  }, []);
-
+  // Dibujar la cuadrícula en el canvas
   const drawGrid = (ctx) => {
     for (let row = 0; row < gridSize; row++) {
       for (let col = 0; col < gridSize; col++) {
@@ -95,14 +127,16 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
     }
   };
 
+  // Actualizar el canvas cuando cambia el estado de la cuadrícula
   useEffect(() => {
     const canvas = canvasRef.current;
-    canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+    canvas.addEventListener("contextmenu", (e) => e.preventDefault());
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(ctx);
   }, [grid, pixelSize, offsetX, offsetY]);
 
+  // Manejar clics en el canvas
   const handleCanvasClick = (e) => {
     if (!canDraw) return;
 
@@ -122,6 +156,7 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
     }
   };
 
+  // Manejar zoom con la rueda del mouse
   const handleZoom = (e) => {
     e.preventDefault();
     const zoomFactor = 1.1;
@@ -132,14 +167,16 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
     }
   };
 
+  // Manejar inicio de arrastre
   const handleMouseDown = (e) => {
-    if (e.button === 2) { 
+    if (e.button === 2) {
       setIsDragging(true);
       setStartDragX(e.clientX - offsetX);
       setStartDragY(e.clientY - offsetY);
     }
   };
 
+  // Manejar movimiento durante el arrastre
   const handleMouseMove = (e) => {
     if (isDragging) {
       const newOffsetX = e.clientX - startDragX;
@@ -149,8 +186,9 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
     }
   };
 
+  // Manejar fin de arrastre
   const handleMouseUp = (e) => {
-    if (e.button === 2) { 
+    if (e.button === 2) {
       setIsDragging(false);
     }
   };
@@ -159,7 +197,17 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced }) => {
     <div>
       <SelectedPixelInfo color={"orange"} />
       <ColorPalette
-        colors={["FFFFFF", "0E0E27", "28C641", "2D93DD", "7B53AD", "9B9B9B", "D32734", "DA7D22", "E6DA29"]}
+        colors={[
+          "FFFFFF",
+          "0E0E27",
+          "28C641",
+          "2D93DD",
+          "7B53AD",
+          "9B9B9B",
+          "D32734",
+          "DA7D22",
+          "E6DA29",
+        ]}
         onColorSelect={setSelectedColor}
         selectedColor={selectedColor}
       />
