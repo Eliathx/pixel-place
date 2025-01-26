@@ -13,15 +13,15 @@ const About = () => {
                     Our team is made up of <span style={{color: "#9BBA24"}}>developers</span>, <span style={{color: "#FF8787"}}>designers</span>, and <span style={{color: "#64B6E4"}}>dreamers</span> who believe in the power of collaboration. We came together with a shared vision to create a platform where people from all corners of the globe could come together, express themselves creatively, and build something meaningful as a community. With backgrounds in technology, art, and user experience, we combined our skills to build a unique space where creativity and connection thrive.
                 </p>
                 <p>
-                We wanted to make something that wasn’t just another app—it’s a canvas, a community, and a collaborative art project that anyone, anywhere, can participate in. Whether you're an artist, a gamer, a creator, or simply someone who loves to connect with others, our goal is to provide a place where you can leave your mark on the world, one pixel at a time.
+                    We wanted to make something that wasn’t just another app—it’s a canvas, a community, and a collaborative art project that anyone, anywhere, can participate in. Whether you're an artist, a gamer, a creator, or simply someone who loves to connect with others, our goal is to provide a place where you can leave your mark on the world, one pixel at a time.
                 </p>
                 </div>
             </section>
             <section className='valuesSection'>
-                <h2>Values</h2>
+                <h3>Values</h3>
                 <div>
                     <p>We work together to create something greater than the sum of our parts.
-                    The project is built on global cooperation, where every user contributes to a collective work of art.</p>
+                    The project is built on global cooperation, where every user contributes to a collective work of art</p>
                     <div>
                         <div className='valueIconContainer' style={{backgroundColor: "var(--lightGreen)"}}>
                         <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,8 +36,7 @@ const About = () => {
                     </div>
                 </div>
                 <div>
-                    <p>We foster freedom of expression and innovation.
-                    The platform encourages users to explore and experiment.</p>
+                    <p>We foster freedom of expression and innovation. The platform encourages users to explore and experiment</p>
                     <div>
                         <div className='valueIconContainer' style={{backgroundColor: "var(--lightRed)"}}>
                         <svg width="96" height="96" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +48,7 @@ const About = () => {
                 </div>
                 <div>
                     <p>We value diverse ideas and perspectives.
-                        Anyone can participate and feel welcome.
+                        Anyone can participate and feel welcome
                         </p>
                     <div>
                         <div className='valueIconContainer' style={{backgroundColor: "var(--lightPurple)"}}>
@@ -62,7 +61,7 @@ const About = () => {
                 </div>
                 <div>
                     <p>We enjoy the creative process and connecting with others.
-                    The project is about having fun while creating, facing challenges, and engaging with the community.</p>
+                    The project is about having fun while creating, facing challenges, and engaging with the community</p>
                     <div>
                         <div className='valueIconContainer' style={{backgroundColor: "var(--lightBlue)"}}>
                         <svg width="97" height="96" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,6 +76,12 @@ const About = () => {
 
             </section>
             <FooterNavigationBar/>
+            {/* <img src='redYellowDecor.svg' alt='redYellowDecor' className='bgDecor' 
+            style={{top: '-227px', left: '-280px',}}/>
+            <img src='blueDarkBlueDecor.svg' alt='blueDarkBlueDecor' className='bgDecor'
+            style={{top: '1001px', left: '-454px',}}/>
+            <img src='purpleGreenDecor.svg' alt='purpleGreenDecor' className='bgDecor'
+            style={{top: '1500px', right: '-318px',}}/> */}
         </div>
     );
 };

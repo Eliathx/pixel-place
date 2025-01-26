@@ -1,5 +1,44 @@
-#loginContainer {
-  display: flex;
-  flex-direction: column;
-  
+#loginContainer{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: var(--lightGray);
+    padding: 16px;
+    width: fit-content;
+    margin: auto; 
+    border-radius: 12px;
+    /* drop shadow */
+    box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.25);
+}
+
+#loginFormContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 0px 64px;
+    border-radius: 12px;
+}
+
+#loginTitleContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 8px;
+}
+
+#loginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: stretch;
+}
+
+#inputDataContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }

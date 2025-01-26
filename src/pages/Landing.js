@@ -49,10 +49,9 @@ const Landing = () => {
     }, [dateLive]);
 
     return (
-        <div id='landingContainer'>
+        <div>
             <HeaderNavigationBar/>
-
-            <div id='landingTitleContainer'>
+            <section id='landingTitleContainer'>
                 <div id='landingTitleContainerLeft'>
                     <div id='landingTitle'>
                         A <span className='pixelFont' id='canvasWord'>
@@ -75,9 +74,9 @@ const Landing = () => {
                     </a>
                 </div>
                 <img id='gameImage' src='/game.webp' alt='placeholder'/>
-            </div>
+            </section>
             
-            <div id='landingHowItWorks'>
+            <section id='landingHowItWorks'>
                 <div>
                     <div id='howItWorksTitleText'>
                         How it works
@@ -122,9 +121,9 @@ const Landing = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div id='landingMeasures'>
+            <section id='landingMeasures'>
                 <div className='measureContainer'>
                     <span className='measureTitle'>
                         {pixelsPlaced - 1}+
@@ -157,9 +156,18 @@ const Landing = () => {
                         since the board first went live!
                     </span>
                 </div>
-            </div>
-            <Leaderboard leadeboardData={leadeboardData}/>
+                 
+            </section>
+            <section>
+                <Leaderboard leadeboardData={leadeboardData}/>
+            </section>
             <FooterNavigationBar/>
+            <img src='redYellowDecor.svg' alt='redYellowDecor' className='bgDecor' 
+            style={{top: '173px', right: '-318px',}}/>
+            <img src='blueDarkBlueDecor.svg' alt='blueDarkBlueDecor' className='bgDecor'
+            style={{top: '1001px', left: '-454px',}}/>
+            <img src='purpleGreenDecor.svg' alt='purpleGreenDecor' className='bgDecor'
+            style={{top: '1500px', right: '-318px',}}/>
         </div>
     );
 };

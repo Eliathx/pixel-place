@@ -2,8 +2,8 @@
   --lightRed: #FF8787;
   --darkRed: #772B2B;
   --lightGreen: #CEEF4E;
-  /* --darkGreen: #67772B; */
-  --darkGreen: #97aa50;
+  --darkGreen: #67772B;
+  /* --darkGreen: #97aa50; */
   --lightBlue: #9FD9FA;
   --lightYellow: #FFE780;
   --lightPurple: #DBCAFF;
@@ -20,8 +20,17 @@ h1.bigTitle{
   font-size: 4rem;
 }
 
+h2{
+  font-size: 3rem;
+}
+
+h3{
+  font-size: 2rem;
+}
+
 p{
   color: var(--lightBlack);
+  margin: 0;
 }
 
 section{
@@ -38,11 +47,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x:hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+input {
+  background-color: none;
+  border: none;
 }
 
 .pixelFont {
@@ -51,9 +71,42 @@ code {
   font-style: normal;
 }
 
-a {
-  color: var(--black);
-  text-decoration: none;
+.bgDecor {
+  position: absolute;
+  z-index: -1;
+}
+
+.middleScreenContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.inputData{
+  padding: 12px;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.submitButton{
+  padding: 12px;
+  background-color: var(--lightGreen);
+  border-radius: 6px;
+  color: var(--darkGreen);
+  border: none;
+}
+
+.submitButton:hover {
+  background-color: var(--darkGreen);
+  color: var(--lightGreen);
+
+  path {
+    fill: var(--lightGreen);
+  }
 }
 
 /* li a:hover:not(.active) {
