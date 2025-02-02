@@ -7,8 +7,8 @@ import Game from './pages/Game';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
-const  App = () => {
-   const [username, setUsername] = useState('');
+const App = () => {
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:8000/getUser.php', {
@@ -19,25 +19,30 @@ const  App = () => {
             if (data.loggedIn) {
                 setUsername(data.username);
             } else {
-                window.location.href = '/login';
+                if (window.location.pathname !== '/login') {
+                    window.location.href = '/login';
+                }
             }
+        })
+        .catch(error => {
+            console.error('Error fetching user data:', error);
         });
-   }, []);
+    }, []);
 
-  return (
-    <div className="App">
-        <BrowserRouter>
-            <Routes>
-            <Route path="/" element={<Landing  />} />
-            <Route path="/contact" element={<Contact/>} />
-            <Route path="/about" element={<About  />} />
-            <Route path="/play" element={<Game username={username}  />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            </Routes>
-         </BrowserRouter>
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/play" element={<Game username={username} />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 };
 
 export default App;

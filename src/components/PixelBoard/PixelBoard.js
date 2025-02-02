@@ -154,6 +154,8 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
       // Enviar el píxel al servidor
       placePixel(y, x, selectedColor);
     }
+
+    
   };
 
   // Manejar zoom con la rueda del mouse

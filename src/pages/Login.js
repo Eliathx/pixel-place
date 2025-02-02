@@ -36,7 +36,7 @@ const Login = () => {
                         <h1 className='bigTitle'>Welcome back</h1>
                         <p>Don't have an account? <a href='/signup'><span style={{color:'blue', textDecoration: 'underline'}}>Sign up</span></a></p>
                     </div>
-                    <form id='loginForm' onSubmit={handleSubmit}>
+                    <form id='loginForm' onSubmit={()=>handleSubmit}>
                         <div id='inputDataContainer'>
                             <input name='username' className='inputData' placeholder='Username' required/>
                             <input type='password' name='password' className='inputData' placeholder='Enter your password' required/>
