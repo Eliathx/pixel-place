@@ -1,4 +1,145 @@
-#contactContainer {
+.contactSection{
+  display: flex;
+  gap: auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4rem;
+  
+  /* padding: 0 10rem; */
+}
+
+.formTitle{
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
+
+.formTitleText{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emailLink {
+  display: flex;
+  gap: 8px;
+}
+
+.formContainer {
+  display: flex; 
+  flex-direction: column;
+  text-align: center;
+  background-color: var(--lightGray);
+  width: fit-content;
+  /* margin: auto;  */
+  border-radius: 12px;
+  box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.25);
+  padding: 36px 24px 36px;
+  gap: 24px;
+}
+
+.formTitleContainer {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  align-items: baseline;
+  gap: 8px;
+  width: 608px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: stretch;
+}
+
+
+.imageContainer {
+  position: relative;
+  border-radius: 12px;
+}
+
+.returnButton {
+  position: absolute;
+  background-color: var(--gray);
+  top: 16px;
+  right: 16px;
+  padding: 6px 16px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.returnButton p {
+  color: var(--white);
+}
+
+.returnButton:hover {
+  background-color: var(--lightGray);
+}
+
+.returnButton:hover p {
+  color: var(--black);
+}
+
+.returnButton:hover path {
+  stroke: var(--black);
+}
+
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputDataContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.inputContainer input,
+.inputContainer textarea,
+.inputDataContainer input {
+  padding: 12px;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: stretch;
+}
+
+.inputContainer textarea{
+  resize: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 1rem;
+  color: var(--lightBlack);
+  border: none;
+}
+
+
+.inputDataContainerWithIcon{
+  padding: 0 12px;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inputDataContainerWithIcon input{
+  padding: 12px 4px;
+  width: stretch;
+}
+
+.submitArea{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+

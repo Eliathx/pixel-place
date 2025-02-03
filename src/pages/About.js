@@ -12,6 +12,7 @@ const About = () => {
                 <p>
                     Our team is made up of <span style={{color: "#9BBA24"}}>developers</span>, <span style={{color: "#FF8787"}}>designers</span>, and <span style={{color: "#64B6E4"}}>dreamers</span> who believe in the power of collaboration. We came together with a shared vision to create a platform where people from all corners of the globe could come together, express themselves creatively, and build something meaningful as a community. With backgrounds in technology, art, and user experience, we combined our skills to build a unique space where creativity and connection thrive.
                 </p>
+                <br></br>
                 <p>
                     We wanted to make something that wasn’t just another app—it’s a canvas, a community, and a collaborative art project that anyone, anywhere, can participate in. Whether you're an artist, a gamer, a creator, or simply someone who loves to connect with others, our goal is to provide a place where you can leave your mark on the world, one pixel at a time.
                 </p>

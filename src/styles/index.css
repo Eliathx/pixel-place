@@ -18,28 +18,36 @@
 
 h1.bigTitle{
   font-size: 4rem;
+  margin: 0;
+  font-weight: normal;
 }
 
 h2{
   font-size: 3rem;
+  margin: 0;
+  font-weight: normal;
 }
 
 h3{
   font-size: 2rem;
+  margin: 0;
+  font-weight: normal;
 }
 
 p{
   color: var(--lightBlack);
   margin: 0;
+  font-weight: normal;
 }
 
 section{
-  margin-block-start: 96px;
+  margin-block-start: 64px;
 }
-footer{
-  margin-block-start: 96px;
 
+footer{
+  margin-block-start: 64px;
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', 'Roboto', 'Oxygen',
@@ -63,6 +71,20 @@ a {
 input {
   background-color: none;
   border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 1rem;
+}
+
+select {
+  background-color: none;
+  border-color: var(--white);
+  font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 1rem;
+  color: var(--lightBlack);
 }
 
 .pixelFont {
@@ -92,12 +114,23 @@ input {
   gap: 16px;
 }
 
+
+/* .inputDataWithIcon select{
+  padding: 12px 4px;
+  width: stretch;
+} */
+
 .submitButton{
   padding: 12px;
   background-color: var(--lightGreen);
   border-radius: 6px;
   color: var(--darkGreen);
   border: none;
+  width: stretch;
+  font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 1rem;
 }
 
 .submitButton:hover {
