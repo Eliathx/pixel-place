@@ -6,16 +6,13 @@ import FooterNavigationBar from '../components/FooterNavigationBar';
 
 import Leaderboard from '../components/Leaderboard/Leaderboard';
 
-const Landing = () => {
+const Landing = ({username}) => {
     const [pixelsPlaced, setPixelsPlaced ] = useState(100);
     const [activeUsers , setActiveUsers ] = useState(10);
     const [contries , setCountries] = useState(100);
     const [dateLive] = useState(new Date('2024-12-3'));
     const [daysLive, setDaysLive] = useState(0);
 
-    // Esta data se deberá obtener de la base de datos con un query del top 5 de usuarios con más pixeles colocados
-    // pero por ahora la dejaré hard-coded
-    
     const [leaderboardData, setLeaderboardData] = useState([])
         
     useEffect(() => {
@@ -51,7 +48,7 @@ const Landing = () => {
 
     return (
         <div>
-            <HeaderNavigationBar/>
+            <HeaderNavigationBar username={username}/>
             <section id='landingTitleContainer'>
                 <div id='landingTitleContainerLeft'>
                     <div id='landingTitle'>

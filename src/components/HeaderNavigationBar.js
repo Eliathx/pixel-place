@@ -1,6 +1,6 @@
 import '../styles/HeaderNavigationBar.css';
 
-const HeaderNavigationBar = () => {
+const HeaderNavigationBar = ({username}) => {
     return (
         <div className='headerNavigationBarContainer'>
             <ul className='headerNavigationBar'>
@@ -17,13 +17,15 @@ const HeaderNavigationBar = () => {
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="/about">About</a></li>
                     <li>
-                        <a className="loginLink" href="/login">
-                            Login
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12V10.6667H10.6667V1.33333H6V0H10.6667C11.0333 0 11.3473 0.130667 11.6087 0.392C11.87 0.653333 12.0004 0.967111 12 1.33333V10.6667C12 11.0333 11.8696 11.3473 11.6087 11.6087C11.3478 11.87 11.0338 12.0004 10.6667 12H6ZM4.66667 9.33333L3.75 8.36667L5.45 6.66667H0V5.33333H5.45L3.75 3.63333L4.66667 2.66667L8 6L4.66667 9.33333Z" 
-                                fill="var(--black)"/>
-                            </svg>
-                        </a>
+                        {
+                        username ? <a href='/profile'>{username}</a>: <a className="loginLink" href="/login">
+                        Login
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 12V10.6667H10.6667V1.33333H6V0H10.6667C11.0333 0 11.3473 0.130667 11.6087 0.392C11.87 0.653333 12.0004 0.967111 12 1.33333V10.6667C12 11.0333 11.8696 11.3473 11.6087 11.6087C11.3478 11.87 11.0338 12.0004 10.6667 12H6ZM4.66667 9.33333L3.75 8.36667L5.45 6.66667H0V5.33333H5.45L3.75 3.63333L4.66667 2.66667L8 6L4.66667 9.33333Z" 
+                            fill="var(--black)"/>
+                        </svg>
+                        </a>   
+                        }
                     </li>
                 </div>
             </ul>
