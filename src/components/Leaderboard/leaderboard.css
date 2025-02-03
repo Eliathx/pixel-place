@@ -1,6 +1,6 @@
 h1{
     font-weight: normal;
-    line-height: 0;
+    /* line-height: 0; */
 }
 .podiumContainer{
     margin: 0 auto;
