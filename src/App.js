@@ -10,7 +10,6 @@ import Profile from './pages/Profile';
 
 
 const App = () => {
-    const [username, setUsername] = useState('');
     const [data, setData] = useState({});
     useEffect(() => {
         fetch('http://localhost:8000/getUser.php', {
@@ -20,7 +19,6 @@ const App = () => {
         .then(data => {
             if (data.loggedIn) {
                 setData(data);
-                setUsername(data.username);
             } else {
                 if (window.location.pathname === '/play') {
                     window.location.href = '/login';
@@ -36,10 +34,10 @@ const App = () => {
         <div className="App">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Landing username={username} />} />
+                    <Route path="/" element={<Landing username={data.username} />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/play" element={<Game username={username} />} />
+                    <Route path="/play" element={<Game username={data.username} />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/profile" element={<Profile profileData={data} />} />

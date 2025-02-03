@@ -30,9 +30,9 @@ const Profile = ({ profileData }) => {
     return (
         <div style={{ textAlign: 'center' }}>
             <h2>@{profileData.username}</h2>
-            <p>Pixels placed: {profileData.pixelsPlaced}</p>
-            <p>Creation date: {profileData.creationDate}</p>
-            <p>Leaderboard position:</p>
+            <p>Pixels placed: {profileData.pixelsplaced}</p>
+            <p>Creation date: {profileData.creationdate}</p>
+            <p>Leaderboard position: {profileData.leaderboardPosition}</p>
 
             <button onClick={handleLogout}>Log out</button>
 

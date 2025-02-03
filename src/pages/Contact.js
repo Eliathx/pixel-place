@@ -38,7 +38,7 @@ const Contact = () => {
                 setStatusMessage("Error a: " + result.message);
             }
         } catch (error) {
-            setStatusMessage("Error al conectar con el servidor: " + error);
+            setStatusMessage("Error al conectar con el servidor: " + error.message);
         }
     };
 
