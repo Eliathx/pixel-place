@@ -19,7 +19,7 @@ const GameHeader = ({timeLeft, username}) => {
           </a>
         </li>
         {timeLeft > 0 ? <span>Next pixel available in: <b>{formatTime(timeLeft)}</b></span> : <span>Place your pixel in the grid!</span>}
-        <a href="/contact">@{username}</a>
+        <a href="/profile">@{username}</a>
       </ul>
     </div>
   );
