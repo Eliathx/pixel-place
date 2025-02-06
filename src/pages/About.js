@@ -7,7 +7,7 @@ const About = ({username}) => {
         <div>
             <HeaderNavigationBar username={username}/>
             <section className='aboutSection'>
-                <h1 className='bigTitle'>About</h1>
+                <h1 className='bigTitle' style={{whiteSpace:'nowrap'}}>About Us</h1>
                 <div>
                 <p>
                     Our team is made up of <span style={{color: "#9BBA24"}}>developers</span>, <span style={{color: "#FF8787"}}>designers</span>, and <span style={{color: "#64B6E4"}}>dreamers</span> who believe in the power of collaboration. We came together with a shared vision to create a platform where people from all corners of the globe could come together, express themselves creatively, and build something meaningful as a community. With backgrounds in technology, art, and user experience, we combined our skills to build a unique space where creativity and connection thrive.
