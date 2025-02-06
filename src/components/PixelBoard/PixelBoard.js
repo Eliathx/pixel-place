@@ -229,7 +229,7 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
     if (e.deltaY < 0) {
       setPixelSize((prevSize) => Math.min(prevSize * zoomFactor, 50));
     } else {
-      setPixelSize((prevSize) => Math.max(prevSize / zoomFactor, 2));
+      setPixelSize((prevSize) => Math.max(prevSize / zoomFactor, 30));
     }
   };
 
