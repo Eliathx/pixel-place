@@ -19,6 +19,11 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startDragX, setStartDragX] = useState(0);
   const [startDragY, setStartDragY] = useState(0);
+  const [selectedTool, setSelectedTool] = useState("color"); // 'color' o 'cursor'
+  const [selectedPixelInfo, setSelectedPixelInfo] = useState({
+    color: null,
+    username: null,
+  });
 
   useEffect(() => {
     const connectWebSocket = () => {
@@ -128,34 +133,93 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
   };
 
   // Actualizar el canvas cuando cambia el estado de la cuadrícula
+  // useEffect(() => {
+  //   const canvas = canvasRef.current;
+  //   canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+  //   const ctx = canvas.getContext("2d");
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   drawGrid(ctx);
+  // }, [grid, pixelSize, offsetX, offsetY]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.addEventListener("contextmenu", (e) => e.preventDefault());
     const ctx = canvas.getContext("2d");
+    
+    // Limpiar y dibujar la cuadrícula
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(ctx);
-  }, [grid, pixelSize, offsetX, offsetY]);
+  
+    // Dibujar borde de selección si está en modo cursor
+    if (selectedTool === "cursor" && 
+        selectedPixelInfo.x !== null && 
+        selectedPixelInfo.y !== null) {
+      const { x, y } = selectedPixelInfo;
+      
+      ctx.strokeStyle = "#000000";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(
+        x * pixelSize + offsetX,
+        y * pixelSize + offsetY,
+        pixelSize,
+        pixelSize
+      );
+    }
+  }, [grid, pixelSize, offsetX, offsetY, selectedTool, selectedPixelInfo]); // Añadir dependencias
+
 
   // Manejar clics en el canvas
-  const handleCanvasClick = (e) => {
-    if (!canDraw) return;
+  const handleCanvasClick = async (e) => {
+  const canvas = canvasRef.current;
+  const rect = canvas.getBoundingClientRect();
+  const x = Math.floor((e.clientX - rect.left - offsetX) / pixelSize);
+  const y = Math.floor((e.clientY - rect.top - offsetY) / pixelSize);
 
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const x = Math.floor((e.clientX - rect.left - offsetX) / pixelSize);
-    const y = Math.floor((e.clientY - rect.top - offsetY) / pixelSize);
+  if (x < 0 || x >= gridSize || y < 0 || y >= gridSize) return;
 
-    if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
-      const newGrid = [...grid];
-      newGrid[y][x] = selectedColor;
-      setGrid(newGrid);
-      onPixelPlaced();
+  if (selectedTool === 'cursor') {
+    const username = await fetchPixelUser(y, x);
+    setSelectedPixelInfo({
+      color: grid[y][x] === "#FFFFFF" ? "#C0C0C0" : grid[y][x],
+      x,
+      y,
+      username: username
+    });
+  } else if (canDraw) {
+    const newGrid = [...grid];
+    newGrid[y][x] = selectedColor;
+    setGrid(newGrid);
+    onPixelPlaced();
+    await placePixel(y, x, selectedColor);
+  }
+};
 
-      // Enviar el píxel al servidor
-      placePixel(y, x, selectedColor);
+  const fetchPixelUser = async (row, col) => {
+    try {
+      const response = await fetch("http://localhost:8000/getPixelUser.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ row, col }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+  
+      if (data.error) {
+        console.error(data.error);
+        return null;
+      }
+  
+      return data.username;
+    } catch (error) {
+      console.error("Error fetching pixel user:", error);
+      return null;
     }
-
-    
   };
 
   // Manejar zoom con la rueda del mouse
@@ -197,7 +261,11 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
 
   return (
     <div>
-      <SelectedPixelInfo color={"orange"} />
+      <SelectedPixelInfo
+        color={selectedPixelInfo.color}
+        username={selectedPixelInfo.username}
+        isVisible={selectedTool === 'cursor'}
+      />
       <ColorPalette
         colors={[
           "FFFFFF",
@@ -210,7 +278,12 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
           "DA7D22",
           "E6DA29",
         ]}
-        onColorSelect={setSelectedColor}
+        onColorSelect={(color) => {
+          setSelectedColor(color);
+          setSelectedTool('color');
+        }}
+        onToolSelect={setSelectedTool}
+        selectedTool={selectedTool}
         selectedColor={selectedColor}
       />
       <canvas

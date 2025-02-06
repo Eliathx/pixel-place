@@ -1,8 +1,11 @@
-const SelectedPixelInfo = ({ color, x, y }) => {
+const SelectedPixelInfo = ({ color, username, isVisible }) => {
+  if (!isVisible) return null;
+  if (!username) return null;
+  if (!color) return null;
   return (
-      <div className="pixel-info">
-        Selected pixel by <b  style={{ color: color }}>@santiagox</b>
-      </div>
+    <div className="pixel-info">
+      Selected pixel by <b style={{ color }}>@{username}</b>
+    </div>
   );
 };
 

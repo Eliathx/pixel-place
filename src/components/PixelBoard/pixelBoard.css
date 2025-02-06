@@ -12,7 +12,13 @@
     min-height: 100vh;
     min-width: 100vw;
     overflow: hidden;
+    cursor: crosshair;
   }
+
+  canvas[cursor-mode="true"] {
+    cursor: pointer; /* Cursor tipo puntero cuando está en modo selección */
+  }
+
   .pixel-grid {
     display: grid;
     grid-template-columns: repeat(100, 10px);

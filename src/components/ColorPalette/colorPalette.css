@@ -2,13 +2,18 @@
     position: absolute;
     display: flex;
     gap: 12px;
-    bottom: 3rem;
+    bottom: 1rem;
     left: 30%;
+    border: 1px solid #9B9B9B;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    padding: 1.5rem 3rem;
+    border-radius: 12px;
   }
   
   .color-swatch {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     border: 2px solid #ccc;
     cursor: pointer;
     transition: transform 0.2s, border-color 0.2s;
@@ -24,3 +29,15 @@
     transform: scale(1.2);
   }
   
+.tool-icon {
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  border: 2px dashed transparent;
+}
+
+.tool-icon.selected {
+  border-color: #000;
+  background-color: #e7f1ff;
+}
+
