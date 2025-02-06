@@ -1,0 +1,33 @@
+.ad-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+  
+.ad-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px #F2F2F2;
+}
+.ad-modal > img{
+    width: 480px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+.ad-modal > div{
+    background-color: var(--lightRed);
+    padding: 1rem 0;
+    width: 100%;
+    border-radius: 6px;
+}

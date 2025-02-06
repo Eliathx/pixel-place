@@ -5,7 +5,7 @@ import GameHeader from "../components/GameHeader/GameHeader";
 
 const Game = ({username}) => {
     const [canDraw, setCanDraw] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(5); 
+    const [timeLeft, setTimeLeft] = useState(2); 
 
     useEffect(() => {
     if (timeLeft === 0) {
@@ -20,7 +20,7 @@ const Game = ({username}) => {
 
     const handlePixelPlaced = () => {
       setCanDraw(false); 
-      setTimeLeft(5); 
+      setTimeLeft(2); 
     };
   
     return (

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import ColorPalette from "../ColorPalette/ColorPalette";
 import "./pixelBoard.css";
 import SelectedPixelInfo from "./SelectedPixelInfo";
+import AdModal from "../AdModal/AdModal";
 
 const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
   const canvasRef = useRef(null);
@@ -14,6 +15,10 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
       .map(() => Array(gridSize).fill("#ffffff"))
   );
 
+  const [pixelsPlaced, setPixelsPlaced] = useState(0);
+  const [showAd, setShowAd] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(25);
+  
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -110,8 +115,7 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
         console.error(data.error);
         return;
       }
-
-      console.log("Pixel placed successfully:", data);
+      setPixelsPlaced(prev => prev + 1);
     } catch (error) {
       console.error("Error placing pixel:", error);
     }
@@ -132,14 +136,20 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
     }
   };
 
-  // Actualizar el canvas cuando cambia el estado de la cuadrícula
-  // useEffect(() => {
-  //   const canvas = canvasRef.current;
-  //   canvas.addEventListener("contextmenu", (e) => e.preventDefault());
-  //   const ctx = canvas.getContext("2d");
-  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //   drawGrid(ctx);
-  // }, [grid, pixelSize, offsetX, offsetY]);
+  useEffect(() => {
+    let timeoutId;
+    
+    if (pixelsPlaced > 0 && pixelsPlaced % 3 === 0) {
+      setShowAd(true);
+      timeoutId = setTimeout(() => {
+        setShowAd(false);
+      }, 10000); // 10 segundos para la publicidad
+    }
+  
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [pixelsPlaced]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -165,34 +175,39 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
         pixelSize
       );
     }
-  }, [grid, pixelSize, offsetX, offsetY, selectedTool, selectedPixelInfo]); // Añadir dependencias
+  }, [grid, pixelSize, offsetX, offsetY, selectedTool, selectedPixelInfo]); 
 
 
   // Manejar clics en el canvas
   const handleCanvasClick = async (e) => {
-  const canvas = canvasRef.current;
-  const rect = canvas.getBoundingClientRect();
-  const x = Math.floor((e.clientX - rect.left - offsetX) / pixelSize);
-  const y = Math.floor((e.clientY - rect.top - offsetY) / pixelSize);
-
-  if (x < 0 || x >= gridSize || y < 0 || y >= gridSize) return;
-
-  if (selectedTool === 'cursor') {
-    const username = await fetchPixelUser(y, x);
-    setSelectedPixelInfo({
-      color: grid[y][x] === "#FFFFFF" ? "#C0C0C0" : grid[y][x],
-      x,
-      y,
-      username: username
-    });
-  } else if (canDraw) {
-    const newGrid = [...grid];
-    newGrid[y][x] = selectedColor;
-    setGrid(newGrid);
-    onPixelPlaced();
-    await placePixel(y, x, selectedColor);
-  }
-};
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const x = Math.floor((e.clientX - rect.left - offsetX) / pixelSize);
+    const y = Math.floor((e.clientY - rect.top - offsetY) / pixelSize);
+  
+    if (x < 0 || x >= gridSize || y < 0 || y >= gridSize) return;
+  
+    if (selectedTool === 'cursor') {
+      const username = await fetchPixelUser(y, x);
+      setSelectedPixelInfo({
+        color: grid[y][x] === "#FFFFFF" ? "#C0C0C0" : grid[y][x],
+        x,
+        y,
+        username: username
+      });
+    } else if (canDraw) {
+      const newGrid = [...grid];
+      // Solo colocar píxel si el color es diferente al actual
+      if (newGrid[y][x] !== selectedColor) {
+        newGrid[y][x] = selectedColor;
+        setGrid(newGrid);
+        onPixelPlaced();
+        
+        await placePixel(y, x, selectedColor);
+        setPixelsPlaced(prev => prev + 1);
+      }
+    }
+  };
 
   const fetchPixelUser = async (row, col) => {
     try {
@@ -261,6 +276,7 @@ const PixelArtCanvas = ({ canDraw, onPixelPlaced, username }) => {
 
   return (
     <div>
+      <AdModal show={showAd} onClose={() => setShowAd(false)} />
       <SelectedPixelInfo
         color={selectedPixelInfo.color}
         username={selectedPixelInfo.username}
