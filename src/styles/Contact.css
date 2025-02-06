@@ -133,7 +133,8 @@
 }
 
 .inputDataContainerWithIcon input{
-  padding: 12px 4px;
+  padding: 12px 12px;
+  border-radius: 6px;
   width: stretch;
 }
 
@@ -141,5 +142,20 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid var(--lightBlue);
+  width: 16px;
+  height: 16px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 

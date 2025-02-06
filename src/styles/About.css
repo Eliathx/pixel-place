@@ -40,6 +40,16 @@
   border-radius: 8px;
 }
 
+.valueIconContainer:hover {
+  animation: spinFast 3s linear infinite forwards;
+}
+
+@keyframes spinFast {
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
 .valuesSection > div > div{
   display: flex;
   flex-direction: column;

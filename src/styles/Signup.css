@@ -26,7 +26,13 @@
   display: flex;
   flex-direction: column;
   align-items: baseline;
+  /* justify-content: baseline; */
   gap: 8px;
+  width: 352px;
+}
+
+#signupTitleContainer > h1{
+  text-align: left;
 }
 
 #signupForm{
@@ -36,7 +42,7 @@
   width: stretch;
 }
 
-#inputDataContainer{
+#inputDContainer{
   display: flex;
   flex-direction: column;
   gap: 16px;

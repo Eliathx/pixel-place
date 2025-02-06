@@ -20,7 +20,7 @@ $password = $data['password'] ?? '';
 
 if (empty($username) || empty($password)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Campos requeridos']);
+    echo json_encode(['success' => false, 'message' => 'Required field missing']);
     exit;
 }
 
@@ -30,16 +30,22 @@ try {
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && $password === $user['password']) {
+    if (!$user) {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'User not found']);
+        exit;
+    }
+
+    if ($password === $user['password']) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         echo json_encode(['success' => true, 'username' => $user['username']]);
     } else {
         http_response_code(401);
-        echo json_encode(['success' => false, 'message' => 'Credenciales inválidas']);
+        echo json_encode(['success' => false, 'message' => 'Invalid password']);
     }
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Error en la base de datos']);
+    echo json_encode(['success' => false, 'message' => 'Database error']);
 }
 ?>

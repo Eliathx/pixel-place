@@ -20,7 +20,7 @@ const App = () => {
             if (data.loggedIn) {
                 setData(data);
             } else {
-                if (window.location.pathname === '/play') {
+                if (window.location.pathname === '/play' || window.location.pathname === '/profile') {
                     window.location.href = '/login';
                 }
             }
@@ -35,8 +35,8 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Landing username={data.username} />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact username={data.username} />} />
+                    <Route path="/about" element={<About username={data.username} />} />
                     <Route path="/play" element={<Game username={data.username} />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />

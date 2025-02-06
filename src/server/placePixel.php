@@ -12,7 +12,7 @@ use WebSocket\Client;
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data['row']) || !isset($data['col']) || !isset($data['color'])) {
-    echo json_encode(["error" => "Datos incompletos"]);
+    echo json_encode(["error" => "Missing data"]);
     exit;
 }
 
@@ -30,7 +30,7 @@ try {
     $userId = $stmtUserId->fetchColumn();
 
     if (!$userId) {
-        echo json_encode(["error" => "Usuario no encontrado"]);
+        echo json_encode(["error" => "User not found"]);
         exit;
     }
 
@@ -59,11 +59,11 @@ try {
     ]));
     $client->close();
 
-    echo json_encode(["success" => true, "message" => "Pixel guardado y transmitido"]);
+    echo json_encode(["success" => true, "message" => "Pixel saved and transmitted"]);
 
 } catch (PDOException $e) {
-    echo json_encode(["error" => "Error en la base de datos: " . $e->getMessage()]);
+    echo json_encode(["error" => "Database error: " . $e->getMessage()]);
 } catch (Exception $e) {
-    echo json_encode(["error" => "Error al conectar al WebSocket: " . $e->getMessage()]);
+    echo json_encode(["error" => "Error trying to connect to websocket: " . $e->getMessage()]);
 }
 ?>

@@ -26,6 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['error' => 'Pixel not found']);
     }
 } else {
-    echo json_encode(['error' => 'Método no permitido']);
+    echo json_encode(['error' => 'Mehod not allowed']);
 }
 ?>

@@ -1,8 +1,11 @@
+import { useState } from "react";
 import '../styles/Login.css';
 
 const Login = () => {
+    const [statusMessage, setStatusMessage] = useState("");
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setStatusMessage('');
         const formData = new FormData(e.target);
         const data = {
             username: formData.get('username'),
@@ -20,7 +23,7 @@ const Login = () => {
             if (result.success) {
                 window.location.href = '/play';
             } else {
-                alert('Error: ' + result.message);
+                setStatusMessage(result.message);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -49,14 +52,18 @@ const Login = () => {
                             <input name='username' className='inputData' placeholder='Username' required/>
                             <input name='password' type='password' className='inputData' placeholder='Enter your password' required/>
                         </div>
-                        <button className='submitButton' >Log in</button>
+                        <div className='submitArea'>
+                            {statusMessage && <p style={{color:'var(--darkGreen)'}}>{statusMessage}</p>}
+                            <button className='submitButton' >Log in</button>
+                        </div>
                     </form>
                 </div>
             </main>
             <img src='redYellowDecor.svg' alt='redYellowDecor' className='bgDecor' 
             style={{top: '-227px', left: '-280px',}}/>
             <img src='purpleGreenDecor.svg' alt='purpleGreenDecor' className='bgDecor'
-            style={{top: '173px', right: '-318px',}}/>
+            // style={{top: '173px', right: '-318px',}}/>
+            style={{top: '-160px', right: '-378px',}}/>
         </div>
     );
 };

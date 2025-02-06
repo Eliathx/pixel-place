@@ -2,9 +2,7 @@ import "./leaderboard.css";
 
 const Leaderboard = ({leaderboardData}) => {
   return (
-    <section style={{margin: "0 4rem"}}>
-        <h1>Current Leaderboard</h1>
-        <p>See who's at the top!</p>
+    <section style={{marginLeft: "4rem", marginRight: "4rem"}}>
       
         <div className="leaderboardContainer">
             <div className="podiumContainer">

@@ -1,12 +1,8 @@
-h1{
-    font-weight: normal;
-    /* line-height: 0; */
-}
 .podiumContainer{
     margin: 0 auto;
     width: fit-content;
-   display: flex;
-   align-items: flex-end; 
+    display: flex;
+    align-items: flex-end; 
 }
 
 .leaderboardContainer{

@@ -2,10 +2,10 @@ import '../styles/About.css';
 import HeaderNavigationBar from '../components/HeaderNavigationBar';
 import FooterNavigationBar from '../components/FooterNavigationBar';
 
-const About = () => {
+const About = ({username}) => {
     return (
         <div>
-            <HeaderNavigationBar/>
+            <HeaderNavigationBar username={username}/>
             <section className='aboutSection'>
                 <h1 className='bigTitle'>About</h1>
                 <div>
@@ -77,12 +77,10 @@ const About = () => {
 
             </section>
             <FooterNavigationBar/>
-            {/* <img src='redYellowDecor.svg' alt='redYellowDecor' className='bgDecor' 
+            <img src='redYellowDecor.svg' alt='redYellowDecor' className='bgDecor' 
             style={{top: '-227px', left: '-280px',}}/>
-            <img src='blueDarkBlueDecor.svg' alt='blueDarkBlueDecor' className='bgDecor'
-            style={{top: '1001px', left: '-454px',}}/>
             <img src='purpleGreenDecor.svg' alt='purpleGreenDecor' className='bgDecor'
-            style={{top: '1500px', right: '-318px',}}/> */}
+            style={{top: '300px', right: '-318px',}}/>
         </div>
     );
 };

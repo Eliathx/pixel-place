@@ -14,6 +14,6 @@ try {
     $pixels = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($pixels);
 } catch (PDOException $e) {
-    echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
+    echo json_encode(["error" => "Connection Error: " . $e->getMessage()]);
 }
 ?>

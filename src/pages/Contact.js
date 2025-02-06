@@ -3,7 +3,7 @@ import '../styles/Contact.css';
 import HeaderNavigationBar from '../components/HeaderNavigationBar';
 import FooterNavigationBar from '../components/FooterNavigationBar';
 
-const Contact = () => {
+const Contact = ({username}) => {
     const [formData, setFormData] = useState({
         name: "",
         lastName: "",
@@ -13,6 +13,7 @@ const Contact = () => {
         message: ""
     });
     const [statusMessage, setStatusMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,6 +23,7 @@ const Contact = () => {
         e.preventDefault();
 
         setStatusMessage("");
+        setIsSubmitting(true);
 
         try {
             const response = await fetch('http://localhost:8000/sendEmail.php', {
@@ -35,16 +37,18 @@ const Contact = () => {
                 setStatusMessage("Correo enviado correctamente");
                 setFormData({ name: "", lastName: "", email: "", phone: "", countryCode: "", message: "" });
             } else {
-                setStatusMessage("Error a: " + result.message);
+                setStatusMessage("Correo no enviado: " + result.message);
             }
         } catch (error) {
             setStatusMessage("Error al conectar con el servidor: " + error.message);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     return (
         <div>
-            <HeaderNavigationBar/>
+            <HeaderNavigationBar username={username}/>
             <section className='contactSection'>
                 <div className='formTitle'>
                     <h1 className='bigTitle'>Contact Us</h1>
@@ -69,8 +73,8 @@ const Contact = () => {
                     <form className='form' onSubmit={handleSubmit}>
                         <div className="inputContainer">
                             <div className='inputDataContainer'>
-                                <input name='name' placeholder='First Name' value={formData.name} onChange={handleChange} required/>
-                                <input name='lastName' placeholder='Last Name' value={formData.lastName} onChange={handleChange} required/>
+                                <input name='name' placeholder='First Name' value={formData.name} onChange={handleChange} maxLength={30} required/>
+                                <input name='lastName' placeholder='Last Name' value={formData.lastName} onChange={handleChange} maxLength={30} required/>
                             </div>
                             <div className='inputDataContainerWithIcon' style={{paddingRight:'0'}}>
                                 <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,13 +90,15 @@ const Contact = () => {
                                     <option value='+49'>+49</option>
                                     <option value='+81'>+81</option>
                                 </select>
-                                <input name='phone' style={{borderLeft:'2px solid var(--lightGray)', borderRadius: '0px 6px 6px 0px'}} placeholder='Phone Number' value={formData.phone} onChange={handleChange} required/>
+                                <input name='phone' style={{borderLeft:'2px solid var(--lightGray)', borderRadius: '0px 6px 6px 0px'}} placeholder='Phone Number' value={formData.phone} onChange={handleChange} minLength={9} maxLength={10} required/>
                             </div>
                             <textarea name='message' placeholder='How can we help?'style={{height:'171px'}} value={formData.message} onChange={handleChange} required maxLength={300} />
                         </div>
                         <div className='submitArea'>
-                            <button className='submitButton' type="submit">Submit</button>
-                            {statusMessage && <p style={{color:'var(--darkGreen)'}}>{statusMessage}</p>}
+                            {statusMessage? <p style={{color:'var(--darkGreen)'}}>{statusMessage}</p>: null}
+                            <button className='submitButton' type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? <p className="loader"></p> : 'Submit'}
+                            </button>
                             <p style={{fontSize:'0.75rem'}}>By contacting us, you agree to receive mails from us.</p>
                         </div>
                     </form>
@@ -102,6 +108,8 @@ const Contact = () => {
             <FooterNavigationBar/>
             <img src='redYellowDecor.svg' alt='redYellowDecor' className='bgDecor' 
             style={{top: '-227px', left: '-280px',}}/>
+            <img src='purpleGreenDecor.svg' alt='purpleGreenDecor' className='bgDecor'
+            style={{top: '205px', right: '320px',}}/>
             
         </div>
     );

@@ -20,7 +20,7 @@ class PixelWebSocket implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        echo "Mensaje recibido: $msg\n";
+        echo "Received message: $msg\n";
         $data = json_decode($msg, true);
     
         if (isset($data['action']) && $data['action'] === 'placePixel') {
@@ -28,7 +28,7 @@ class PixelWebSocket implements MessageComponentInterface {
             $col = $data['col'];
             $color = $data['color'];
     
-            echo "Transmitiendo píxel: ($row, $col) -> $color\n";
+            echo "Transmitting pixel: ($row, $col) -> $color\n";
     
             foreach ($this->clients as $client) {
                 $client->send(json_encode([
